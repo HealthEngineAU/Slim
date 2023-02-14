@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added support for PHP 8.1.
 
+### Changed
+
+- Changed build provider from Travis CI to Circle CI.
+
 ### Removed
 
 - Removed support for PHP 5.3.
