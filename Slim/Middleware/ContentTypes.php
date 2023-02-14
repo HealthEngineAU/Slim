@@ -113,8 +113,6 @@ class ContentTypes extends \Slim\Middleware
      */
     protected function parseJson($input)
     {
-        var_dump('should have parsed JSON here');
-
         if (function_exists('json_decode')) {
             $result = json_decode($input, true);
             if(json_last_error() === JSON_ERROR_NONE) {

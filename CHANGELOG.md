@@ -17,6 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Removed automatic parsing of XML request bodies.
+- Removed encryption/decryption of cookies with the mcrypt PHP extension.
+- Removed middleware `Slim\Middleware\SessionCookie`.
 - Removed support for PHP 5.3.
 - Removed support for PHP 5.4.
 - Removed support for PHP 5.6.
