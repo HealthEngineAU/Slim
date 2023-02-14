@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\Middleware;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -30,7 +35,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class PrettyExceptionsTest extends PHPUnit_Framework_TestCase
+class PrettyExceptionsTest extends TestCase
 {
     /**
      * Test middleware returns successful response unchanged
@@ -120,7 +125,7 @@ class PrettyExceptionsTest extends PHPUnit_Framework_TestCase
         $mw->setNextMiddleware($app);
         $mw->call();
 
-        $this->assertContains('LogicException', $app->response()->body());
+        $this->assertStringContainsString('LogicException', $app->response()->body());
     }
 
     /**
@@ -128,7 +133,7 @@ class PrettyExceptionsTest extends PHPUnit_Framework_TestCase
      */
     public function testWithCustomLogWriter()
     {
-        $this->setExpectedException('\LogicException');
+        $this->expectException('\LogicException');
 
         \Slim\Environment::mock(array(
             'SCRIPT_NAME' => '/index.php',

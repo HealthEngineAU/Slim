@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -30,7 +35,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class LogWriterTest extends PHPUnit_Framework_TestCase
+class LogWriterTest extends TestCase
 {
     public function testInstantiation()
     {
@@ -42,7 +47,7 @@ class LogWriterTest extends PHPUnit_Framework_TestCase
 
     public function testInstantiationWithNonResource()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $fw = new \Slim\LogWriter(@fopen('/foo/bar.txt', 'w'));
     }
 }

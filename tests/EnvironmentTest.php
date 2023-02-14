@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -30,7 +35,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class EnvironmentTest extends PHPUnit_Framework_TestCase
+class EnvironmentTest extends TestCase
 {
     /**
      * Default server settings assume the Slim app is installed
@@ -41,7 +46,7 @@ class EnvironmentTest extends PHPUnit_Framework_TestCase
      * These only provide a common baseline for the following
      * tests; tests are free to override these values.
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $_SERVER['DOCUMENT_ROOT'] = '/var/www';
         $_SERVER['SCRIPT_FILENAME'] = '/var/www/foo/index.php';

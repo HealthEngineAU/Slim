@@ -1,0 +1,33 @@
+version: 2.1
+
+executors:
+  php81:
+    docker:
+      - image: cimg/php:8.1
+
+jobs:
+  test:
+    parameters:
+      php-executor:
+        type: string
+    executor: << parameters.php-executor >>
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-<< parameters.php-executor >>-dependencies-{{ checksum "composer.json" }}
+            - v1-<< parameters.php-executor >>-dependencies-
+      - run: composer update
+      - save_cache:
+          key: v1-<< parameters.php-executor >>-dependencies-{{ checksum "composer.json" }}
+          paths:
+            - ./vendor
+      - run: composer test
+
+workflows:
+  all-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              php-executor: [php81]

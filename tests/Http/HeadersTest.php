@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\Http;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -30,7 +35,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class HeadersTest extends PHPUnit_Framework_TestCase
+class HeadersTest extends TestCase
 {
     public function testNormalizesKey()
     {

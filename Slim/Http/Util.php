@@ -387,11 +387,15 @@ class Util
      * This method will parse the HTTP request's `Cookie` header
      * and extract cookies into an associative array.
      *
-     * @param  string
+     * @param string|null $header
      * @return array
      */
     public static function parseCookieHeader($header)
     {
+        if ($header === null) {
+            return [];
+        }
+
         $cookies = array();
         $header = rtrim($header, "\r\n");
         $headerPieces = preg_split('@\s*[;,]\s*@', $header);

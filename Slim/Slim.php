@@ -776,7 +776,9 @@ class Slim
     {
         if (is_integer($time)) {
             $this->response->headers->set('Last-Modified', gmdate('D, d M Y H:i:s T', $time));
-            if ($time === strtotime($this->request->headers->get('IF_MODIFIED_SINCE'))) {
+            $ifModifiedSince = $this->request->headers->get('IF_MODIFIED_SINCE');
+
+            if (is_string($ifModifiedSince) && $time === strtotime($ifModifiedSince)) {
                 $this->halt(304);
             }
         } else {

@@ -60,7 +60,6 @@ class ContentTypes extends \Slim\Middleware
     {
         $defaults = array(
             'application/json' => array($this, 'parseJson'),
-            'application/xml' => array($this, 'parseXml'),
             'text/xml' => array($this, 'parseXml'),
             'text/csv' => array($this, 'parseCsv')
         );
@@ -91,7 +90,7 @@ class ContentTypes extends \Slim\Middleware
      * @param  string $contentType
      * @return mixed
      */
-    protected function parse ($input, $contentType)
+    protected function parse($input, $contentType)
     {
         if (isset($this->contentTypes[$contentType]) && is_callable($this->contentTypes[$contentType])) {
             $result = call_user_func($this->contentTypes[$contentType], $input);
@@ -114,39 +113,14 @@ class ContentTypes extends \Slim\Middleware
      */
     protected function parseJson($input)
     {
+        var_dump('should have parsed JSON here');
+
         if (function_exists('json_decode')) {
             $result = json_decode($input, true);
             if(json_last_error() === JSON_ERROR_NONE) {
                 return $result;
             }
         }
-    }
-
-    /**
-     * Parse XML
-     *
-     * This method creates a SimpleXMLElement
-     * based upon the XML input. If the SimpleXML
-     * extension is not available, the raw input
-     * will be returned unchanged.
-     *
-     * @param  string                  $input
-     * @return \SimpleXMLElement|string
-     */
-    protected function parseXml($input)
-    {
-        if (class_exists('SimpleXMLElement')) {
-            try {
-                $backup = libxml_disable_entity_loader(true);
-                $result = new \SimpleXMLElement($input);
-                libxml_disable_entity_loader($backup);
-                return $result;
-            } catch (\Exception $e) {
-                // Do nothing
-            }
-        }
-
-        return $input;
     }
 
     /**

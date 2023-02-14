@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\Middleware;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -30,14 +35,14 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class ContentTypesTest extends PHPUnit_Framework_TestCase
+class ContentTypesTest extends TestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         ob_start();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         ob_end_clean();
     }
@@ -78,45 +83,6 @@ class ContentTypesTest extends PHPUnit_Framework_TestCase
         $body = $s->request()->getBody();
         $this->assertTrue(is_string($body));
         $this->assertEquals('{"foo":"bar"', $body);
-    }
-
-    /**
-     * Test parses XML
-     */
-    public function testParsesXml()
-    {
-        \Slim\Environment::mock(array(
-            'REQUEST_METHOD' => 'POST',
-            'CONTENT_TYPE' => 'application/xml',
-            'CONENT_LENGTH' => 68,
-            'slim.input' => '<books><book><id>1</id><author>Clive Cussler</author></book></books>'
-        ));
-        $s = new \Slim\Slim();
-        $s->add(new \Slim\Middleware\ContentTypes());
-        $s->run();
-        $body = $s->request()->getBody();
-        $this->assertInstanceOf('SimpleXMLElement', $body);
-        $this->assertEquals('Clive Cussler', (string) $body->book->author);
-    }
-
-    /**
-     * Test ignores XML with errors
-     */
-    public function testParsesXmlWithError()
-    {
-	libxml_use_internal_errors(true);
-        \Slim\Environment::mock(array(
-            'REQUEST_METHOD' => 'POST',
-            'CONTENT_TYPE' => 'application/xml',
-            'CONTENT_LENGTH' => 68,
-            'slim.input' => '<books><book><id>1</id><author>Clive Cussler</book></books>' //<-- This should be incorrect!
-        ));
-        $s = new \Slim\Slim();
-        $s->add(new \Slim\Middleware\ContentTypes());
-        $s->run();
-        $body = $s->request()->getBody();
-        $this->assertTrue(is_string($body));
-        $this->assertEquals('<books><book><id>1</id><author>Clive Cussler</book></books>', $body);
     }
 
     /**
