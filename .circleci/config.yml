@@ -13,6 +13,8 @@ jobs:
     executor: << parameters.php-executor >>
     steps:
       - checkout
+      - run: sudo apt-get update -qq
+      - run: sudo apt-get install -qq libmcrypt
       - run: printf "\n" | sudo pecl install mcrypt
       - restore_cache:
           keys:
