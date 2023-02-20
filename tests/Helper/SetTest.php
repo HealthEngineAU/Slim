@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\Helper;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -30,12 +35,12 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class SetTest extends PHPUnit_Framework_TestCase
+class SetTest extends TestCase
 {
     protected $bag;
     protected $property;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->bag = new \Slim\Helper\Set();
         $this->property = new \ReflectionProperty($this->bag, 'data');

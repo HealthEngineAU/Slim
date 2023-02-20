@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\Middleware;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -54,7 +59,7 @@ class CustomAppMethod
     }
 }
 
-class MethodOverrideTest extends PHPUnit_Framework_TestCase
+class MethodOverrideTest extends TestCase
 {
     /**
      * Test overrides method as POST

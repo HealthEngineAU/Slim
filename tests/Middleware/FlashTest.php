@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\Middleware;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -30,12 +35,12 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class SlimFlashTest extends PHPUnit_Framework_TestCase
+class FlashTest extends TestCase
 {
     /**
      * Setup
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $_SESSION = array();
     }

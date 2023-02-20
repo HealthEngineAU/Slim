@@ -392,7 +392,7 @@ class Request
 
     /**
      * Get Body
-     * @return string
+     * @return array|string
      */
     public function getBody()
     {

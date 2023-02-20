@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests\Http;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -30,7 +35,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class RequestTest extends PHPUnit_Framework_TestCase
+class RequestTest extends TestCase
 {
     /**
      * Test sets HTTP method
@@ -283,7 +288,7 @@ class RequestTest extends PHPUnit_Framework_TestCase
      */
     public function testPostWithoutInput()
     {
-        $this->setExpectedException('RuntimeException');
+        $this->expectException('RuntimeException');
         $env = \Slim\Environment::mock();
         unset($env['slim.input']);
         $req = new \Slim\Http\Request($env);

@@ -47,6 +47,8 @@ namespace Slim;
  * @package Slim
  * @author  Josh Lockhart
  * @since   1.6.0
+ * @implements \ArrayAccess<string, string>
+ * @implements \IteratorAggregate<string, string>
  */
 class Environment implements \ArrayAccess, \IteratorAggregate
 {
@@ -183,7 +185,7 @@ class Environment implements \ArrayAccess, \IteratorAggregate
     /**
      * Array Access: Offset Exists
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset): bool
     {
         return isset($this->properties[$offset]);
     }
@@ -191,7 +193,7 @@ class Environment implements \ArrayAccess, \IteratorAggregate
     /**
      * Array Access: Offset Get
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         if (isset($this->properties[$offset])) {
             return $this->properties[$offset];
@@ -203,7 +205,7 @@ class Environment implements \ArrayAccess, \IteratorAggregate
     /**
      * Array Access: Offset Set
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->properties[$offset] = $value;
     }
@@ -211,7 +213,7 @@ class Environment implements \ArrayAccess, \IteratorAggregate
     /**
      * Array Access: Offset Unset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->properties[$offset]);
     }
@@ -221,7 +223,7 @@ class Environment implements \ArrayAccess, \IteratorAggregate
      *
      * @return \ArrayIterator
      */
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->properties);
     }

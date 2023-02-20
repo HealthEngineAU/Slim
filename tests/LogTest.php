@@ -1,4 +1,9 @@
 <?php
+
+namespace Tests;
+
+use PHPUnit\Framework\TestCase;
+
 /**
  * Slim - a micro PHP 5 framework
  *
@@ -40,7 +45,7 @@ class MyWriter
     }
 }
 
-class LogTest extends PHPUnit_Framework_TestCase
+class LogTest extends TestCase
 {
     public function testEnabled()
     {
@@ -67,7 +72,7 @@ class LogTest extends PHPUnit_Framework_TestCase
 
     public function testSetInvalidLevel()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $log = new \Slim\Log(new MyWriter());
         $log->setLevel(\Slim\Log::DEBUG + 1);
     }

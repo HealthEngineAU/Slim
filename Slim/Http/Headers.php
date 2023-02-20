@@ -63,7 +63,7 @@ class Headers extends \Slim\Helper\Set
 
     /**
      * Extract HTTP headers from an array of data (e.g. $_SERVER)
-     * @param  array $data
+     * @param  \IteratorAggregate $data
      * @return array
      */
     public static function extract($data)
