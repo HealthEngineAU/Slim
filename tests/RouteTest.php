@@ -378,7 +378,7 @@ class RouteTest extends TestCase
     {
         $property = new \ReflectionProperty('\Slim\Route', 'defaultConditions');
         $property->setAccessible(true);
-        $property->setValue(array(
+        $property->setValue($property, array(
             'id' => '\d+'
         ));
 
