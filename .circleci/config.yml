@@ -4,9 +4,19 @@ executors:
   php80:
     docker:
       - image: cimg/php:8.0
+    resource_class: small
   php81:
     docker:
       - image: cimg/php:8.1
+    resource_class: small
+  php82:
+    docker:
+      - image: cimg/php:8.2
+    resource_class: small
+  php83:
+    docker:
+      - image: cimg/php:8.3
+    resource_class: small
 
 jobs:
   test:
@@ -33,4 +43,4 @@ workflows:
       - test:
           matrix:
             parameters:
-              php-executor: [php80, php81]
+              php-executor: [php80, php81, php82, php83]
